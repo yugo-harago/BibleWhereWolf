@@ -1,20 +1,16 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script setup lang="ts">
+import SetupPage from './pages/SetupPage.vue';
+import RevealPage from './pages/RevealPage.vue';
+import GamePage from './pages/GamePage.vue';
+import { useGame } from './composables/useGame';
+
+const { phase } = useGame();
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <SetupPage v-if="phase === 'setup'" />
+  <RevealPage v-else-if="phase === 'reveal'" />
+  <GamePage v-else-if="phase === 'game'" />
 </template>
 
 <style scoped>
