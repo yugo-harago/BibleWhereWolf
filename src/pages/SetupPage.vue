@@ -5,8 +5,8 @@ import { useGame } from '../composables/useGame';
 
 const { startGame } = useGame();
 
-function handleStart({ players, wolves }: { players: number; wolves: number }) {
-  startGame(players, wolves);
+function handleStart({ players, wolves, duration }: { players: number; wolves: number; duration: number }) {
+  startGame(players, wolves, duration);
 }
 </script>
 

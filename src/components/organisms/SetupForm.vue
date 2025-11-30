@@ -4,19 +4,20 @@ import LabeledInput from '../molecules/LabeledInput.vue';
 import BaseButton from '../atoms/BaseButton.vue';
 
 const emit = defineEmits<{
-  (e: 'start', payload: { players: number; wolves: number }): void;
+  (e: 'start', payload: { players: number; wolves: number; duration: number }): void;
 }>();
 
 const players = ref(3);
 const wolves = ref(1);
+const duration = ref(3);
 
 const isValid = computed(() => {
-  return players.value > wolves.value + 1 && players.value >= 3 && wolves.value >= 1;
+  return players.value > wolves.value + 1 && players.value >= 3 && wolves.value >= 1 && duration.value >= 1;
 });
 
 function startGame() {
   if (isValid.value) {
-    emit('start', { players: players.value, wolves: wolves.value });
+    emit('start', { players: players.value, wolves: wolves.value, duration: duration.value });
   }
 }
 </script>
@@ -36,6 +37,13 @@ function startGame() {
         id="wolves"
         label="人狼の数"
         v-model="wolves"
+        type="number"
+        :min="1"
+      />
+      <LabeledInput
+        id="duration"
+        label="話し合い時間（分）"
+        v-model="duration"
         type="number"
         :min="1"
       />

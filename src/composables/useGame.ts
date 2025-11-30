@@ -22,9 +22,10 @@ export function useGame() {
   const currentPlayer = computed(() => players.value[currentPlayerIndex.value]);
   const isTimerRunning = computed(() => timerInterval.value !== null);
 
-  function startGame(pCount: number, wCount: number) {
+  function startGame(pCount: number, wCount: number, durationMinutes: number) {
     playerCount.value = pCount;
     wolfCount.value = wCount;
+    timer.value = durationMinutes * 60;
     
     // Select random verse
     const verseIndex = Math.floor(Math.random() * verses.length);
@@ -83,7 +84,7 @@ export function useGame() {
     players.value = [];
     currentVerse.value = null;
     currentPlayerIndex.value = 0;
-    timer.value = 180;
+    // timer reset is handled in startGame
     stopTimer();
   }
 
